@@ -1,6 +1,7 @@
 import { BsTrash } from 'react-icons/bs'
 import { AiOutlineCheckCircle } from 'react-icons/ai'
 import { useCallback } from 'react';
+import classNames from 'classnames';
 
 
 type TodoItemProps = {
@@ -36,12 +37,12 @@ export const TodoItem = ({
             className="flex items-center justify-between"
         >
             <div>
-                {title}
+                <span className={classNames({ 'line-through': done })}>{title}</span>
                 <div className='flex gap-2 text-slate-400 text-sm'>
                     {/* <span>#{category}</span> */}
                 </div>
             </div>
-            <div className='flex gap-2 text-xl'>
+            <div className='flex gap-2 text-xl cursor-pointer'>
                 <AiOutlineCheckCircle onClick={handleCheck} />
                 <BsTrash onClick={handleDelete} />
             </div>

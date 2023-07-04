@@ -44,7 +44,11 @@ const todoStore = create<TodoState & TodoActions>((set) => ({
         }
     ],
     updateTodos: (todos) => set(() => ({ todos })),
-    checkTodoItem: (id) => set((state) => ({ todos: state.todos.map((todo => ({ ...todo, done: todo.id === id }))) })),
+    checkTodoItem: (id) => set((state) => {
+        const todoItemById = state.todos.find(todo => todo.id === id);
+        if (!todoItemById) return { todos: state.todos };
+        return { todos: [...state.todos.filter(todo => todo.id !== id), { ...todoItemById, done: true }] }
+    }),
     deleteTodoItem: (id) => set((state) => ({ todos: state.todos.filter((todo => todo.id !== id)) })),
 }))
 

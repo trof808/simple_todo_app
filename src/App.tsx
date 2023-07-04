@@ -52,6 +52,7 @@ function App() {
                         category={task.category}
                         onDelete={handleDeleteTask}
                         onCheck={handleCheckTask}
+                        done={task.done}
                       />
                     </div>
                   )}
