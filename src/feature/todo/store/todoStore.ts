@@ -1,7 +1,6 @@
-import { create } from 'zustand'
-import { createSelectors } from '../../../shared/store/createSelectors'
+import { atom } from 'recoil';
 
-type TodoItemType = {
+export type TodoItemType = {
     id: string;
     title: string;
     category: string;
@@ -9,47 +8,16 @@ type TodoItemType = {
     done: boolean;
 }
 
-type TodoState = {
-    todos: TodoItemType[];
-}
+export type TodoStoreType = TodoItemType[];
 
-type TodoActions = {
-    updateTodos: (todos: TodoState['todos']) => void,
-    checkTodoItem: (id: string) => void,
-    deleteTodoItem: (id: string) => void,
-}
+export const todoStore = atom<TodoStoreType>({
+    key: 'todos',
+    default: [],
+})
 
-const todoStore = create<TodoState & TodoActions>((set) => ({
-    todos: [
-        {
-            id: '1',
-            title: 'Проверить задачи в джире',
-            priority: 0,
-            category: 'работа',
-            done: false,
-        },
-        {
-            id: '2',
-            title: 'Написать Васе че там с API',
-            priority: 1,
-            category: 'работа',
-            done: false,
-        },
-        {
-            id: '3',
-            title: 'Собрать шкаф',
-            priority: 2,
-            category: 'дом',
-            done: false,
-        }
-    ],
-    updateTodos: (todos) => set(() => ({ todos })),
-    checkTodoItem: (id) => set((state) => {
-        const todoItemById = state.todos.find(todo => todo.id === id);
-        if (!todoItemById) return { todos: state.todos };
-        return { todos: [...state.todos.filter(todo => todo.id !== id), { ...todoItemById, done: true }] }
-    }),
-    deleteTodoItem: (id) => set((state) => ({ todos: state.todos.filter((todo => todo.id !== id)) })),
-}))
-
-export const useTodoStore = createSelectors(todoStore)
+// checkTodoItem: (id) => set((state) => {
+//     const todoItemById = state.todos.find(todo => todo.id === id);
+//     if (!todoItemById) return { todos: state.todos };
+//     return { todos: [...state.todos.filter(todo => todo.id !== id), { ...todoItemById, done: true }] }
+// }),
+// deleteTodoItem: (id) => set((state) => ({ todos: state.todos.filter((todo => todo.id !== id)) })),

@@ -35,6 +35,7 @@ export const TodoItem = ({
     return (
         <div
             className="flex items-center justify-between"
+            data-qa-type='todo-item'
         >
             <div>
                 <span className={classNames({ 'line-through': done })}>{title}</span>
