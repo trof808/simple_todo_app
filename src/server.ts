@@ -1,41 +1,45 @@
-import { createServer } from "miragejs"
+import { Model, createServer } from "miragejs"
 
 export function makeServer({ environment = "test" } = {}) {
   let server = createServer({
     environment,
 
-    routes() {
-      this.get("/api/todos", () => ({
-        todos: [
-            {
-                id: '1',
-                title: 'Проверить задачи в джире',
-                priority: 0,
-                category: 'работа',
-                done: false,
-            },
-            {
-                id: '2',
-                title: 'Написать Васе че там с API',
-                priority: 1,
-                category: 'работа',
-                done: false,
-            },
-            {
-                id: '3',
-                title: 'Собрать шкаф',
-                priority: 2,
-                category: 'дом',
-                done: false,
-            }
-        ]
-      }))
+    models: {
+      todos: Model,
+    },
 
-      let newId = 4
-      this.post("/api/reminders", (schema, request) => {
+    routes() {
+      this.get("/api/todos", (schema) => {
+        // @ts-ignore
+        return schema.todos.all();
+      })
+
+      this.post("/api/todos", (schema, request) => {
         let attrs = JSON.parse(request.requestBody)
-        attrs.id = `${newId++}`
-        return { todos: attrs, message: 'Задача добавлена' }
+        attrs.done = false;
+        // @ts-ignore
+        return schema.todos.create(attrs);
+      })
+
+      this.post('/api/todos/check', (schema, request) => {
+        let attrs = JSON.parse(request.requestBody);
+        // @ts-ignore
+        let todo = schema.todos.find(attrs.id);
+        return todo.update({ done: true });
+      })
+
+      this.post('/api/todos/uncheck', (schema, request) => {
+        let attrs = JSON.parse(request.requestBody);
+        // @ts-ignore
+        let todo = schema.todos.find(attrs.id);
+        return todo.update({ done: false });
+      })
+
+      this.post('/api/todos/delete', (schema, request) => {
+        let attrs = JSON.parse(request.requestBody);
+        // @ts-ignore
+        let todo = schema.todos.find(attrs.id);
+        return todo.destroy();
       })
     },
   })

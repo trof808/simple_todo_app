@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from "react-query";
 import { render, act, queryHelpers, screen } from '@testing-library/react'
 import { TodosWrapper } from '../TodosWrapper'
 import { MutableSnapshot, RecoilRoot } from 'recoil';
@@ -21,13 +22,17 @@ export type DefaultProps = {
     defaultState: StoreType;
 }
 
+export const queryClient = new QueryClient();
+
 const AppProviders: React.JSXElementConstructor<{ children: React.ReactElement }> = ({ children }) => {
     const initialState: InitialStateType = ({ set }: any) => {
         set(todoStore, children.props?.renderCallbackProps?.defaultState?.todoStore)
     };
-    return <RecoilRoot initializeState={initialState}>
-        {children}
-    </RecoilRoot>
+    return <QueryClientProvider client={queryClient}>
+        <RecoilRoot initializeState={initialState}>
+            {children}
+        </RecoilRoot>
+    </QueryClientProvider>
 }
 
 // jest.mock('../../../services/getTodosApi', () => ({

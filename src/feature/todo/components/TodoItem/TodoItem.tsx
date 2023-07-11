@@ -1,5 +1,5 @@
 import { BsTrash } from 'react-icons/bs'
-import { AiOutlineCheckCircle } from 'react-icons/ai'
+import { AiOutlineCheckCircle, AiOutlineUndo } from 'react-icons/ai'
 import { useCallback } from 'react';
 import classNames from 'classnames';
 
@@ -10,6 +10,7 @@ type TodoItemProps = {
     priority: number;
     category: string;
     onCheck: (id: string) => void;
+    onUncheck: (id: string) => void;
     onDelete: (id: string) => void;
     done?: boolean;
 }
@@ -21,6 +22,7 @@ export const TodoItem = ({
     // category,
     onCheck,
     onDelete,
+    onUncheck,
     done = false
 }: TodoItemProps) => {
 
@@ -32,19 +34,24 @@ export const TodoItem = ({
         onCheck(id)
     }, [id, onCheck]);
 
+    const handleUncheck = useCallback(() => {
+        onUncheck(id);
+    }, [id, onUncheck]);
+
     return (
         <div
             className="flex items-center justify-between"
             data-qa-type='todo-item'
         >
-            <div>
+            <div className='w-max'>
                 <span className={classNames({ 'line-through': done })}>{title}</span>
                 <div className='flex gap-2 text-slate-400 text-sm'>
                     {/* <span>#{category}</span> */}
                 </div>
             </div>
             <div className='flex gap-2 text-xl cursor-pointer'>
-                <AiOutlineCheckCircle onClick={handleCheck} />
+                {!done && <AiOutlineCheckCircle onClick={handleCheck} />}
+                {done && <AiOutlineUndo onClick={handleUncheck} />}
                 <BsTrash onClick={handleDelete} />
             </div>
         </div>

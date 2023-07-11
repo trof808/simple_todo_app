@@ -6,6 +6,7 @@ import { TodoItemType } from '../../store/todoStore';
 type TodoListProps = {
     todos: TodoItemType[]
     onCheckTodo: (id: string) => void;
+    onUnCheckTodo: (id: string) => void;
     onDeleteTodo: (id: string) => void;
 }
 
@@ -13,6 +14,7 @@ export const TodoList = ({
     todos,
     onCheckTodo,
     onDeleteTodo,
+    onUnCheckTodo,
 }: TodoListProps) => {
     // @ts-ignore
     const handleOnDragEnd = useCallback((result) => {
@@ -25,13 +27,6 @@ export const TodoList = ({
       }
     }, [])
   
-    const handleDeleteTask = useCallback((id: string) => {
-      onDeleteTodo(id);
-    }, [onDeleteTodo]);
-  
-    const handleCheckTask = useCallback((id: string) => {
-      onCheckTodo(id);
-    }, [onCheckTodo]);
     return (
         <DragDropContext onDragEnd={handleOnDragEnd} onDragStart={handleDragStart}>
             <Droppable droppableId='droppable-1'>
@@ -51,8 +46,9 @@ export const TodoList = ({
                                             title={task.title}
                                             priority={task.priority}
                                             category={task.category}
-                                            onDelete={handleDeleteTask}
-                                            onCheck={handleCheckTask}
+                                            onDelete={onDeleteTodo}
+                                            onCheck={onCheckTodo}
+                                            onUncheck={onUnCheckTodo}
                                             done={task.done}
                                         />
                                     </div>
