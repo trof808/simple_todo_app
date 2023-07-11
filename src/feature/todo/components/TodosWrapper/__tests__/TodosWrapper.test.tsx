@@ -1,4 +1,4 @@
-import { render, act, queryHelpers } from '@testing-library/react'
+import { render, act, queryHelpers, screen } from '@testing-library/react'
 import { TodosWrapper } from '../TodosWrapper'
 import { MutableSnapshot, RecoilRoot } from 'recoil';
 import MockAdapter from "axios-mock-adapter";
@@ -69,7 +69,12 @@ describe('Тестирование фичи списка задач', () => {
         mock.reset();
     });
 
+    // Рендерим фичу и проверяем весь флоу, от вызова апи до рендера
+    // Без проверки вызова запроса и стора (только с моком и рендером) мы уже проверяем все то, что обычно проверяем UI тесте
+    // Но также преимущество в том что мы можем легко докинуть проверок сюда например, что вызвался конкретный апи метод,
+    // Что данные попали в стор, что вызвался определенный метод в коде, экшен и тд
     it('Список задач отображается', async () => {
+        // 0. Мокируем апи
         mock.onGet(TODO_API).reply(200, [
             {
                 id: '1',
@@ -95,11 +100,17 @@ describe('Тестирование фичи списка задач', () => {
         ]);
         // 1. Рендерим компонент фичи
         const { container } = await act(async () => await render(<TodosWrapper />, { wrapper: AppProviders }))
+        
+        // 2. Проверяем, что вызвался нужный нам метод
+        expect(mock.history.get.some(method => method.url === TODO_API)).toBeTruthy();
 
-        // 2. Проверяем, что задачи отобразились на странице
         const inputSearch = queryHelpers.queryAllByAttribute('data-qa-type', container, 'todo-item') as HTMLInputElement[];
+        const checkTasksInJiraTodoItem = screen.queryByText('Проверить задачи в джире')
+
+        // 3. Проверяем, что задачи отобразились на странице
         expect(inputSearch.length).toBe(3);
-        expect(mock.history.get[0].url).toEqual('/api');
+        // 4. Проверяем по названию задачи, что она есть в DOM 
+        expect(checkTasksInJiraTodoItem).toBeInTheDocument();
     })
     // it('Пользователь отмечает задачу выполненной и она становится зачеркнутой', async () => {
     //     const { container } = await act(async () => await render(<TodosWrapper />, { wrapper: AppProviders }))
