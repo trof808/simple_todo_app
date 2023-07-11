@@ -1,9 +1,10 @@
 import { useCallback } from "react"
 import { todoStore } from "../store/todoStore";
 import { getTodosApi } from "../services/getTodosApi";
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 export const useTodosActionsHook = () => {
+    const todos = useRecoilValue(todoStore);
     const setTodos = useSetRecoilState(todoStore);
 
     const getTodosAction = useCallback(async () => {
@@ -12,5 +13,5 @@ export const useTodosActionsHook = () => {
             setTodos(res)
     }, [setTodos]);
 
-    return { getTodosAction }
+    return { getTodosAction, todos }
 }

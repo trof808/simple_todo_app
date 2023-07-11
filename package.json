@@ -55,6 +55,7 @@
     "@types/react-beautiful-dnd": "^13.1.4",
     "axios-mock-adapter": "^1.21.5",
     "babel-jest": "^29.6.1",
+    "miragejs": "^0.1.47",
     "tailwindcss": "^3.3.2"
   }
 }

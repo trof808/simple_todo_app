@@ -8,8 +8,8 @@ import { TODO_API } from '../../../services/constants';
 
 export const makeDelay =
     async (timeout = 0) =>
-    async () =>
-        new Promise((resolve) => setTimeout(resolve, timeout));
+        async () =>
+            new Promise((resolve) => setTimeout(resolve, timeout));
 
 export type InitialStateType = (mutableSnapshot: MutableSnapshot) => void;
 
@@ -21,8 +21,8 @@ export type DefaultProps = {
     defaultState: StoreType;
 }
 
-const AppProviders: React.JSXElementConstructor<{children: React.ReactElement}> = ({ children }) => {
-    const initialState: InitialStateType = ({set}: any) => {
+const AppProviders: React.JSXElementConstructor<{ children: React.ReactElement }> = ({ children }) => {
+    const initialState: InitialStateType = ({ set }: any) => {
         set(todoStore, children.props?.renderCallbackProps?.defaultState?.todoStore)
     };
     return <RecoilRoot initializeState={initialState}>
@@ -75,32 +75,34 @@ describe('Тестирование фичи списка задач', () => {
     // Что данные попали в стор, что вызвался определенный метод в коде, экшен и тд
     it('Список задач отображается', async () => {
         // 0. Мокируем апи
-        mock.onGet(TODO_API).reply(200, [
-            {
-                id: '1',
-                title: 'Проверить задачи в джире',
-                priority: 0,
-                category: 'работа',
-                done: false,
-            },
-            {
-                id: '2',
-                title: 'Написать Васе че там с API',
-                priority: 1,
-                category: 'работа',
-                done: false,
-            },
-            {
-                id: '3',
-                title: 'Собрать шкаф',
-                priority: 2,
-                category: 'дом',
-                done: false,
-            }
-        ]);
+        mock.onGet(TODO_API).reply(200, {
+            todos: [
+                {
+                    id: '1',
+                    title: 'Проверить задачи в джире',
+                    priority: 0,
+                    category: 'работа',
+                    done: false,
+                },
+                {
+                    id: '2',
+                    title: 'Написать Васе че там с API',
+                    priority: 1,
+                    category: 'работа',
+                    done: false,
+                },
+                {
+                    id: '3',
+                    title: 'Собрать шкаф',
+                    priority: 2,
+                    category: 'дом',
+                    done: false,
+                }
+            ]
+        });
         // 1. Рендерим компонент фичи
         const { container } = await act(async () => await render(<TodosWrapper />, { wrapper: AppProviders }))
-        
+
         // 2. Проверяем, что вызвался нужный нам метод
         expect(mock.history.get.some(method => method.url === TODO_API)).toBeTruthy();
 
