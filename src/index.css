@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@300&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 * {
   overscroll-behavior-y: contain;
+  font-family: 'Shantell Sans', cursive;
 }
 
 body {
