@@ -1,11 +1,11 @@
 import { QueryClient, QueryClientProvider } from "react-query";
 import { render, act, queryHelpers, screen } from '@testing-library/react'
-import { TodosWrapper } from '../TodosWrapper'
 import { MutableSnapshot, RecoilRoot } from 'recoil';
 import MockAdapter from "axios-mock-adapter";
-import { TodoStoreType, todoStore } from '../../../store/todoStore';
+import { TodoStoreType, todoStore } from '../../store/todoStore';
 import axios from 'axios';
-import { TODO_API } from '../../../services/constants';
+import { TODO_API } from '../../services/constants';
+import { TodoFeature } from "../TodoFeature";
 
 export const makeDelay =
     async (timeout = 0) =>
@@ -34,33 +34,6 @@ const AppProviders: React.JSXElementConstructor<{ children: React.ReactElement }
         </RecoilRoot>
     </QueryClientProvider>
 }
-
-// jest.mock('../../../services/getTodosApi', () => ({
-//     __esModule: true,
-//     getTodosApi: () => [
-//         {
-//             id: '1',
-//             title: 'Проверить задачи в джире',
-//             priority: 0,
-//             category: 'работа',
-//             done: false,
-//         },
-//         {
-//             id: '2',
-//             title: 'Написать Васе че там с API',
-//             priority: 1,
-//             category: 'работа',
-//             done: false,
-//         },
-//         {
-//             id: '3',
-//             title: 'Собрать шкаф',
-//             priority: 2,
-//             category: 'дом',
-//             done: false,
-//         }
-//     ],
-// }));
 
 describe('Тестирование фичи списка задач', () => {
     let mock: MockAdapter;
@@ -106,7 +79,7 @@ describe('Тестирование фичи списка задач', () => {
             ]
         });
         // 1. Рендерим компонент фичи
-        const { container } = await act(async () => await render(<TodosWrapper />, { wrapper: AppProviders }))
+        const { container } = await act(async () => await render(<TodoFeature />, { wrapper: AppProviders }))
 
         // 2. Проверяем, что вызвался нужный нам метод
         expect(mock.history.get.some(method => method.url === TODO_API)).toBeTruthy();
