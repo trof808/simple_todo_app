@@ -6,6 +6,7 @@ import { TodoStoreType, todoStore } from '../../store/todoStore';
 import axios from 'axios';
 import { TODO_API } from '../../services/constants';
 import { TodoFeature } from "../TodoFeature";
+import { TODO_TASKS } from "../__mocks__/todoMocks";
 
 export const makeDelay =
     async (timeout = 0) =>
@@ -54,29 +55,7 @@ describe('Тестирование фичи списка задач', () => {
     it('Список задач отображается', async () => {
         // 0. Мокируем апи
         mock.onGet(TODO_API).reply(200, {
-            todos: [
-                {
-                    id: '1',
-                    title: 'Проверить задачи в джире',
-                    priority: 0,
-                    category: 'работа',
-                    done: false,
-                },
-                {
-                    id: '2',
-                    title: 'Написать Васе че там с API',
-                    priority: 1,
-                    category: 'работа',
-                    done: false,
-                },
-                {
-                    id: '3',
-                    title: 'Собрать шкаф',
-                    priority: 2,
-                    category: 'дом',
-                    done: false,
-                }
-            ]
+            todos: TODO_TASKS
         });
         // 1. Рендерим компонент фичи
         const { container } = await act(async () => await render(<TodoFeature />, { wrapper: AppProviders }))
