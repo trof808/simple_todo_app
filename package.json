@@ -28,7 +28,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "test-storybook": "test-storybook"
   },
   "eslintConfig": {
     "extends": [
@@ -63,6 +64,7 @@
     "@storybook/preset-create-react-app": "^7.0.27",
     "@storybook/react": "^7.0.27",
     "@storybook/react-webpack5": "^7.0.27",
+    "@storybook/test-runner": "^0.11.0",
     "@storybook/testing-library": "^0.0.14-next.2",
     "@testing-library/react": "^14.0.0",
     "@types/react-beautiful-dnd": "^13.1.4",
@@ -71,6 +73,7 @@
     "babel-jest": "^29.6.1",
     "babel-plugin-named-exports-order": "^0.0.2",
     "eslint-plugin-storybook": "^0.6.12",
+    "loki": "^0.32.0",
     "miragejs": "^0.1.47",
     "msw": "^1.2.2",
     "msw-storybook-addon": "^1.8.0",
@@ -82,5 +85,20 @@
   },
   "msw": {
     "workerDirectory": "public"
+  },
+  "loki": {
+    "configurations": {
+      "chrome.laptop": {
+        "target": "chrome.docker",
+        "width": 1366,
+        "height": 768,
+        "deviceScaleFactor": 1,
+        "mobile": false
+      },
+      "chrome.iphone7": {
+        "target": "chrome.docker",
+        "preset": "iPhone 7"
+      }
+    }
   }
 }
