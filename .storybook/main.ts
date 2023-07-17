@@ -20,6 +20,7 @@ const config: StorybookConfig = {
         },
       },
     },
+    'creevey',
   ],
   framework: {
     name: "@storybook/react-webpack5",

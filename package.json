@@ -72,6 +72,7 @@
     "axios-mock-adapter": "^1.21.5",
     "babel-jest": "^29.6.1",
     "babel-plugin-named-exports-order": "^0.0.2",
+    "creevey": "^0.8.1",
     "eslint-plugin-storybook": "^0.6.12",
     "loki": "^0.32.0",
     "miragejs": "^0.1.47",

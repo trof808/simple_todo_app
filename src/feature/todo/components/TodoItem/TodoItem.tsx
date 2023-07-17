@@ -50,9 +50,9 @@ export const TodoItem = ({
                 </div>
             </div>
             <div className='flex gap-2 text-xl cursor-pointer'>
-                {!done && <AiOutlineCheckCircle onClick={handleCheck} />}
-                {done && <AiOutlineUndo onClick={handleUncheck} />}
-                <BsTrash onClick={handleDelete} />
+                {!done && <AiOutlineCheckCircle data-qa-type='check-btn' onClick={handleCheck} />}
+                {done && <AiOutlineUndo data-qa-type='uncheck-btn' onClick={handleUncheck} />}
+                <BsTrash data-qa-type='delete-btn' onClick={handleDelete} />
             </div>
         </div>
 

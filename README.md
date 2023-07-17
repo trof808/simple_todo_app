@@ -1,43 +1,56 @@
-## Цель приложения
+## IT's Tinkoff Frontend BBQ party
 
-Показать как можно с помощью Unit тестов тестировать функционал приложения максимально приближенным к поведению пользователя
+### Извлекаем максимум пользы из Unit тестирования (проект)
 
-## Компоненты приложения
+### Преза тут
 
-Приложения должно состоять из следующих компонент
+```Ссылка```
 
-1. Визуальный слой
-2. Бизнес слой работы с данными
-3. Слой интеграции с внешними сервисами (API)
+### Телега для связи
 
-## План
+https://t.me/reatrof
 
-Приложение - простой трекер задач
+### Запуск проект
+```npm i```
+```npm run start```
 
-## Фичи
+сторибук
+```npm run storybook```
 
-+ 1. Создавать задачу
-Название, дата выполнения, кто выполняет, описание, теги
-+ 2. Помечать задачу выполненной
-3. Фильтровать задачи
-Фильтрацию можно сделать табами (сегодня, завтра, все, выполнено)
-+ 4. Удалять задачу
+jest
+```npm run test```
 
-## Тестовые сценарии
+loki
+```npx loki init```
+```npx loki update```
+```npx loki test```
 
-1. После добавления новой задачи отправляется запрос и она появляется в списке
-2. После выбора категории "Сегодня" в списке отображаются только задачи на сегодня
-3. После нажатия на кнопку выполнено, задача становится зачеркнутой
-4. После свайпа вправо, задача становится зачеркнутой
-5. После свайпа влево, задача удаляется и пропадает из списка
-6. После нажатия на кнопку удалить, задача удаляется и пропадает из списка
+### Полезные материалы
 
-## Примеры дизайнов
+[Трофей тестирования фронтенда](https://amorgunov.com/posts/2023-04-01-testing-trophy/)
+[Про разделение архитектуры react приложений от мартина фаулера](https://martinfowler.com/articles/modularizing-react-apps.html)
+[Про пирамиду тестирования](https://martinfowler.com/articles/practical-test-pyramid.html#ToolsAndLibrariesWellLookAt)
+Хорошая книга [Принципы юнит тестирования](https://www.ozon.ru/product/printsipy-yunit-testirovaniya-horikov-vladimir-211424826/?asb=SUQL0brj02pZszt4UDWmxiBnhik2OWOtb4N1BvPHpfc%253D&asb2=nzCn1BsQarB8UZTz2CAhMF8xAFnAQWlM49hS0GIfkvkIxWNBGfdNd6yu0uXYCUQG&avtc=1&avte=2&avts=1689622991&keywords=%D0%BF%D1%80%D0%B8%D0%BD%D1%86%D0%B8%D0%BF%D1%8B+unit+%D1%82%D0%B5%D1%81%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F&sh=wsjPKTH-yQ)
 
-https://dribbble.com/shots/18115059-LaunchPad-Todo
+### Инструменты тестирования
 
-## Тестирование
+https://testing-library.com/
+https://storybook.js.org/docs/react/writing-tests/introduction
 
-1. Написать автотесты на каждый кейс
-2. Написать Unit тесты на каждый кейс
-3. Написать сторибук тесты
+
+### Инструменты мокирования API
+
+https://github.com/miragejs/miragejs
+https://github.com/mswjs/msw
+https://github.com/nock/nock
+https://github.com/ctimmerm/axios-mock-adapter
+
+### Инструменты для скриншот тестирования
+
+https://github.com/creevey/creevey#how-to-start
+https://loki.js.org/
+https://storybook.js.org/addons/@storybook/addon-storyshots
+https://www.chromatic.com/
+https://percy.io/
+https://garris.github.io/BackstopJS/
+

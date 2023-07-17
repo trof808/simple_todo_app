@@ -31,7 +31,7 @@ export const deleteTodoApi = async (id: string) => {
 }
 
 export const checkTodoApi = async (id: string) => {
-    const result = await axios.post(`${TODO_API}/check`, { id })
+    const result = await axios.post<{todos: TodoApiItemType}>(`${TODO_API}/check`, { id })
     return result.data;
 }
 
