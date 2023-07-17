@@ -1,0 +1,34 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1689628109187' stop='1689628109187'>
+    <name>Тестирование фичи списка задач</name>
+    <title>Тестирование фичи списка задач</title>
+    <test-cases>
+        <test-case start='1689628109187' status='passed' stop='1689628109187'>
+            <name>Отображаем фичу и проверяем, что список задач рендерится</name>
+            <title>Отображаем фичу и проверяем, что список задач рендерится</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1689628109187' status='failed' stop='1689628109187'>
+            <name>Пользователь отмечает задачу выполненной</name>
+            <title>Пользователь отмечает задачу выполненной</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>Error: expect(received).toBe(expected) // Object.is equality
+                
+                Expected: 3
+                Received: 1</message>
+                <stack-trace>Error: expect(received).toBe(expected) // Object.is equality
+                
+                Expected: 3
+                Received: 1
+                    at Object.&lt;anonymous> (/Users/n.v.trofimov/work/meetup_app/src/feature/todo/components/__tests__/TodosFeature.test.tsx:86:42)</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>
