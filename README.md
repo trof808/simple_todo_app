@@ -4,7 +4,7 @@
 
 ### Преза тут
 
-Ссылка
+```./tinkoff_front_meetup_trofimov.pdf```
 
 ### Телега для связи
 
