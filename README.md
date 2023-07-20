@@ -8,7 +8,7 @@
 
 ### Телега для связи
 
-https://t.me/reatrof
+[Телега пишите по любым вопросам](https://t.me/reatrof)
 
 ### Запуск проект
 ```
@@ -27,6 +27,14 @@ jest
     npm run test
 ```
 
+После запуска в папке /allure-results будут сгенерированы xml файлы для алюра
+
+Запуск отчета в алюре
+```
+    brew install allure
+    allure serve
+```
+
 loki
 ```
     npx loki init
@@ -43,8 +51,9 @@ loki
 
 ### Инструменты тестирования
 
-1. https://testing-library.com/
-2. https://storybook.js.org/docs/react/writing-tests/introduction
+1. [Testing library](https://testing-library.com/)
+2. [Storybook](https://storybook.js.org/docs/react/writing-tests/introduction)
+3. [Jest-allure генерация отчета в аюле](https://github.com/zaqqaz/jest-allure)
 
 
 ### Инструменты мокирования API
